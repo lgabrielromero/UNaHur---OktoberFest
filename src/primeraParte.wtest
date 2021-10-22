@@ -1,0 +1,51 @@
+import Marcas.*
+import Personas.*
+
+describe "primeraParte" {
+
+	const corona = new Marca()
+	const guiness = new Marca()
+	const jarraCorona = new Jarra()
+	const jarraGuiness = new Jarra()
+	const jorge = new Persona()
+	
+	method initialize(){
+		corona.tipo("rubia")
+		corona.lupulo(6)
+		corona.graduacion(9)
+		
+		guiness.tipo("negra")
+		guiness.lupulo(5)
+		guiness.graduacionReglamentaria(7)
+		guiness.graduacion(9)
+		
+		jarraCorona.marca(corona)
+		jarraCorona.capacidad(2)
+		jarraGuiness.marca(guiness)
+		jarraGuiness.capacidad(2)
+		
+		jorge.aguante(29)
+		jorge.peso(80)
+		jorge.nacionalidad("belga")
+		jorge.comprarJarra(jarraCorona)
+		jorge.comprarJarra(jarraGuiness)
+	}
+	
+	test "contenido De Alcohol"{
+		assert.equals(0.18, jarraCorona.alcoholTotal())
+	}
+	
+	test "alcohol Persona"{
+		assert.equals(0.32, jorge.alcoholIngerido())
+	}
+	
+	test "Jorge esta Ebrio?"{
+		assert.notThat(jorge.estaEbrio())
+	}
+	
+	test "Jorge le gusta"{
+		assert.that(jorge.gustoEnCervezas(corona))
+	}
+	
+		
+}
