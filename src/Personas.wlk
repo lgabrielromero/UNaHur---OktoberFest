@@ -41,6 +41,10 @@ class Persona{
 	method quiereEntrar(carpa){
 		return (self.gustoEnCervezas(carpa.marca())) and (self.musicaTradicional() == carpa.musicaTradicional()) 
 	}
+	
+	method puedeEntrar(carpa){
+		return self.quiereEntrar(carpa)and carpa.dejaIngresar()
+	}
 }
 
 class PersonaAlemana inherits Persona{
