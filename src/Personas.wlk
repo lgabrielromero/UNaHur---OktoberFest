@@ -1,5 +1,5 @@
 import Marcas.*
-
+/*prueba*/
 class Persona{
 	var property peso = 0
 	const jarrasCompradas = []
