@@ -27,8 +27,9 @@ class Persona{
 	
 	method leGustaMarca(marca){return true}
 	
-	method quiereEntrar(carpa){ // Requerimientos - segunda parte : item 5
-		return self.leGustaMarca(carpa.marca()) and (self.musicaTradicional() == carpa.musicaTradicional()) 
+	mmethod entrarALaCarpa(carpa){// Requerimientos - segunda parte : item 5
+   	if (self.puedeEntrar(carpa)){carpa.agregarGente()}else {self.error("Error")}
+   }
 	}
 	
 	method puedeEntrar(carpa){ // Requerimientos - segunda parte : item 7
