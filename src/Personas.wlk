@@ -45,6 +45,10 @@ class Persona{
 	method puedeEntrar(carpa){
 		return self.quiereEntrar(carpa)and carpa.dejaIngresar()
 	}
+	
+	method entrarALaCarpa(carpa){
+   	if (self.puedeEntrar(carpa)){carpa.agregarGente()}
+   }
 }
 
 class PersonaAlemana inherits Persona{
