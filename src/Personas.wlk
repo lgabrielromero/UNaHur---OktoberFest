@@ -40,6 +40,10 @@ class Persona{
 		if (self.puedeEntrar(carpa)){carpa.agregarGente(self)}
 		else{throw new MyException()}
 	}
+	
+	 method estaEnLaCarpa(carpa){
+   	return self.puedeEntrar(carpa)
+   }
 }
 
 class Belga inherits Persona{
