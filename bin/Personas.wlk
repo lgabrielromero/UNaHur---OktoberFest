@@ -1,12 +1,13 @@
 import Marcas.*
 import Carpas.*
-/*prueba*/
+
+class MyException inherits wollok.lang.Exception {}
+
 class Persona{
 	var property peso = 0
 	const jarrasCompradas = []
 	var property musicaTradicional = false
 	var property aguante = 0
-	var property nacionalidad = ""
 	
 	method comprarJarra(jarra){
 		jarrasCompradas.add(jarra)	
@@ -24,27 +25,39 @@ class Persona{
 		return self.alcoholIngerido() * peso > aguante
 	}
 	
-	method gustoEnCervezas(marca){
-		var leGusta = false
-		if (nacionalidad == "belga"){
-			leGusta = marca.lupulo() > 4
-		} 
-		else if (nacionalidad == "checo"){
-			leGusta = marca.graduacion() > 8
-		}
-		else if (nacionalidad == "aleman"){
-			leGusta = true
-		}
-		return leGusta
+	method leGustaMarca(marca){return true}
+	
+	method quiereEntrar(carpa){ // Requerimientos - segunda parte : item 5
+		return self.leGustaMarca(carpa.marca()) and (self.musicaTradicional() == carpa.musicaTradicional()) 
 	}
-
-	method quiereEntrar(carpa){
-		return (self.gustoEnCervezas(carpa.marca())) and (self.musicaTradicional() == carpa.musicaTradicional()) 
+	
+	method puedeEntrar(carpa){ // Requerimientos - segunda parte : item 7
+		return self.quiereEntrar(carpa) and carpa.dejaIngresar()
+	}
+	
+	method entrarACarpa(carpa){ // Requerimientos - segunda parte : item 8
+		if (self.puedeEntrar(carpa)){carpa.agregarGente(self)}
+		else{throw new MyException()}
 	}
 }
 
-class PersonaAlemana inherits Persona{
-	override method quiereEntrar(carpa){
+class Belga inherits Persona{
+	override method leGustaMarca(marca){
+		return marca.lupulo() > 4
+	}
+}
+
+class Checo inherits Persona{
+	override method leGustaMarca(marca){
+		return marca.graduacion() > 4
+	}
+}
+
+class Aleman inherits Persona{
+	override method leGustaMarca(marca){
+		return true
+	}
+	override method quiereEntrar(carpa){  // Requerimientos - segunda parte : item 5
 		return super(carpa) and carpa.cantidadGente().even()
 	}
 }

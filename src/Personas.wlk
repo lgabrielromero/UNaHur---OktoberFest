@@ -1,6 +1,8 @@
 import Marcas.*
 import Carpas.*
 
+class MyException inherits wollok.lang.Exception {}
+
 class Persona{
 	var property peso = 0
 	const jarrasCompradas = []

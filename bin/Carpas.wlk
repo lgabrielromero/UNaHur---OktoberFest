@@ -18,6 +18,8 @@ class Carpa{
     	return self.cantidadGente() <= self.limite()
     }
 
+   
+
 }
 
 
