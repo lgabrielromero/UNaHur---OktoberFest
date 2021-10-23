@@ -18,6 +18,9 @@ class Carpa{
     	return self.cantidadGente() <= self.limite()
     }
 
+    method cantidadEbriosEmpedernidos(personas){
+   return 	personas.jarrasCompradas().count({personas.jarrasCompradas().capacidad()>= 1})
+   }
    
 
 }
