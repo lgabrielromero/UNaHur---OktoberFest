@@ -1,4 +1,5 @@
 import Marcas.*
+import Carpas.*
 /*prueba*/
 class Persona{
 	var property peso = 0
@@ -35,5 +36,15 @@ class Persona{
 			leGusta = true
 		}
 		return leGusta
+	}
+
+	method quiereEntrar(carpa){
+		return (self.gustoEnCervezas(carpa.marca())) and (self.musicaTradicional() == carpa.musicaTradicional()) 
+	}
+}
+
+class PersonaAlemana inherits Persona{
+	override method quiereEntrar(carpa){
+		return super(carpa) and carpa.cantidadGente().even()
 	}
 }
