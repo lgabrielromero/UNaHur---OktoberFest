@@ -25,12 +25,17 @@ class Persona{
 	
 	method leGustaMarca(marca){return true}
 	
-	method quiereEntrar(carpa){
+	method quiereEntrar(carpa){ // Requerimientos - segunda parte : item 5
 		return self.leGustaMarca(carpa.marca()) and (self.musicaTradicional() == carpa.musicaTradicional()) 
 	}
 	
-	method puedeEntrar(carpa){
+	method puedeEntrar(carpa){ // Requerimientos - segunda parte : item 7
 		return self.quiereEntrar(carpa) and carpa.dejaIngresar()
+	}
+	
+	method entrarACarpa(carpa){ // Requerimientos - segunda parte : item 8
+		if (self.puedeEntrar(carpa)){carpa.agregarGente(self)}
+		else{throw new MyException()}
 	}
 }
 
@@ -49,5 +54,8 @@ class Checo inherits Persona{
 class Aleman inherits Persona{
 	override method leGustaMarca(marca){
 		return true
+	}
+	override method quiereEntrar(carpa){  // Requerimientos - segunda parte : item 5
+		return super(carpa) and carpa.cantidadGente().even()
 	}
 }
