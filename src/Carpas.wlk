@@ -18,9 +18,7 @@ class Carpa{
     	return self.cantidadGente() <= self.limite()
     }
 
-    method accesoPermitido(persona){
-   	if (persona.puedeEntrar()){self.agregarGente()}
-   }
+   
 
 }
 
