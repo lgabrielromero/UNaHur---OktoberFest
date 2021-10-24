@@ -1,6 +1,8 @@
 import Marcas.*
 import Carpas.*
 
+//PERSONAS
+
 class MyException inherits wollok.lang.Exception {}
 
 class Persona{
@@ -8,6 +10,7 @@ class Persona{
 	const jarrasCompradas = []
 	var property musicaTradicional = false
 	var property aguante = 0
+	var property nacionalidad = ""
 	
 	method comprarJarra(jarra){
 		jarrasCompradas.add(jarra)	
@@ -16,49 +19,63 @@ class Persona{
 	method jarrasCompradas(){
 		return jarrasCompradas
 	}
-	
+
+//PRIMERA PARTE - 2
 	method alcoholIngerido(){
 		return jarrasCompradas.sum({j => j.alcoholTotal()})
 	}
-	
+
+//PRIMERA PARTE - 3
 	method estaEbrio(){
 		return self.alcoholIngerido() * peso > aguante
 	}
-	
+
 	method leGustaMarca(marca){return true}
-	
-	mmethod entrarALaCarpa(carpa){// Requerimientos - segunda parte : item 5
-   	if (self.puedeEntrar(carpa)){carpa.agregarGente()}else {self.error("Error")}
-   }
+
+//SEGUNDA PARTE - 5	
+	method quiereEntrar(carpa){
+		return self.leGustaMarca(carpa.marca()) and (self.musicaTradicional() == carpa.musicaTradicional()) 
 	}
-	
-	method puedeEntrar(carpa){ // Requerimientos - segunda parte : item 7
+
+//SEGUNDA PARTE - 7
+	method puedeEntrar(carpa){
 		return self.quiereEntrar(carpa) and carpa.dejaIngresar()
 	}
-	
-	method entrarACarpa(carpa){ // Requerimientos - segunda parte : item 8
+//SEGUNDA PARTE - 8
+	method entrarACarpa(carpa){
 		if (self.puedeEntrar(carpa)){carpa.agregarGente(self)}
 		else{throw new MyException()}
 	}
 	
-	 method estaEnLaCarpa(carpa){
-   	return self.puedeEntrar(carpa)
-   }
+	method esEbrioEmpedernido(){
+		return self.jarrasCompradas().all({c => c.capacidad() > 1})
+	}
+
+//SEGUNDA PARTE - 11
+	method esPatriota(){
+		return jarrasCompradas.all({c => c.marca().origen() == self.nacionalidad() })
+	}
+
 }
 
+//PRIMERA PARTE - 4
+
 class Belga inherits Persona{
+	override method nacionalidad() = "Belgica"
 	override method leGustaMarca(marca){
 		return marca.lupulo() > 4
 	}
 }
 
 class Checo inherits Persona{
+	override method nacionalidad() = "Checoslovaquia"
 	override method leGustaMarca(marca){
 		return marca.graduacion() > 4
 	}
 }
 
 class Aleman inherits Persona{
+	override method nacionalidad() = "Alemania"
 	override method leGustaMarca(marca){
 		return true
 	}
