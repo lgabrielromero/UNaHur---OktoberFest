@@ -1,0 +1,76 @@
+import Marcas.*
+import Carpas.*
+import Personas.*
+
+describe "segunaParte"{
+	const persona1 = new Belga()
+	const persona2 = new Checo()
+	const persona3 = new Aleman()
+	const carpa1= new Carpa()//Corona
+	const carpa2= new Carpa()//Guiness
+	const carpa3= new Carpa()//Hofbräu
+	const corona = new MarcaCervezaRubia()
+	const guiness = new MarcaCervezaNegra()
+	const hofbrau = new MarcaCervezaRoja()
+	const jarraGuiness = new Jarra()
+	
+	method initialize(){
+		carpa1.marca(corona)
+		carpa2.marca(guiness)
+		carpa3.marca(hofbrau)
+		hofbrau.lupulo(6)
+		carpa1.limite(3)
+		persona3.aguante(29)
+		persona3.peso(80)
+		persona3.comprarJarra(jarraGuiness)
+	}
+
+
+	test"unaPersonaQuiereEntrarAUnaCarpa"{
+		assert.notThat(persona1.quiereEntrar(carpa1))
+		assert.notThat(persona1.quiereEntrar(carpa2))
+		assert.that(persona1.quiereEntrar(carpa3))
+	}
+	test"unaCarpaDejaIngresarUnaPersona"{
+		assert.that(carpa1.dejaIngresar())
+		//deberia meter a la persona, falta implementar bien el metodo
+		
+		/*Saber si una carpa deja ingresar a una persona, o sea, 
+		 * si dejándola entrar no supera su límite de personas y la persona no está ebria.*/
+	}
+	test"unaPersonaPuedeEntrarAUnaCarpa"{
+		assert.that(persona1.quiereEntrar(carpa3))
+		assert.that(carpa3.dejaIngresar())
+		/*Saber si una persona puede entrar a una carpa, es decir, 
+		 * si quiere entrar a la carpa y la carpa lo deja entrar.*/
+	}
+	test"unaPersonaEntreAUnaCarpa"{
+		carpa3.agregarGente(persona1)
+		assert.notEquals(2,carpa3.cantidadGente())
+		carpa3.agregarGente(persona2)
+		carpa3.agregarGente(persona3)
+		assert.equals(3,carpa3.cantidadGente())
+		
+	}
+	test"unCarpaSirveUnaJarraAUnaPersona"{
+		carpa2.agregarGente(persona2)
+		assert.that(carpa2.servirJarra(persona2,2))
+		/*Hacer que una carpa le sirva una jarra de cerveza a una persona. 
+		 * Se debe indicar la capacidad de la jarra que se está vendiendo.
+		 Si la persona no está en la carpa, generar un error.
+		 Nota: es conveniente que el objeto que representa a la jarra vendida 
+		 se cree en la acción de servir. La marca es la que vende la carpa, la capacidad se está indicando.*/
+	}
+	test"cuantosEbriosEmpedernidosHayDentroDeUnaCarpa"{
+		assert.notEquals(2,carpa1.cantidadEbriosEmpedernidos())
+		/*Saber cuantos ebrios empedernidos hay dentro de una carpa.
+		 *  Los ebrios empedernidos son los ebrios que todas las jarras que compraron, 
+		 son de 1 litro ó más.*/
+	}
+	test"unaPersonaEsPatriota"{
+		assert.that(persona1.esPatriota())
+		/*Saber si una persona es patriota, o sea, 
+		 * si todas las jarras de cerveza que compró son del país del que proviene. 
+		 P.ej. un alemán es patriota si todas las jarras de cerveza que compró son alemanas.*/
+	}
+}
