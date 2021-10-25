@@ -17,8 +17,8 @@ class Carpa{
     	personasDentro.add(persona)
     }
 //SEGUNDA PARTE - 6
-    method dejaIngresar(){
-    	return self.cantidadGente() <= self.limite()
+    method dejaIngresar(persona){
+    	return self.cantidadGente() < self.limite() and not persona.estaEbrio()
     }
     
 //SEGUNDA PARTE - 10

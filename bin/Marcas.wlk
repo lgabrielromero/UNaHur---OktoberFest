@@ -1,4 +1,6 @@
+//MARCAS Y JARRAS
 
+//MARCAS CERVEZA
 class Marca{
 	var property lupulo = 0
 	var property origen = ""
@@ -33,10 +35,12 @@ class MarcaCervezaRoja inherits MarcaCervezaNegra{
 }
 
 
-
+//JARRAS
 class Jarra{
-	var property capacidad
-	var property marca
+	var property capacidad = 0
+	var property marca = null
+	
+//PRIMERA PARTE - 1
 	
 	method alcoholTotal(){
 		return (marca.graduacion() * 0.01) * capacidad

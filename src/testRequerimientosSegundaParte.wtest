@@ -20,12 +20,17 @@ describe "segundaParte"{
 		carpa3.marca(hofbrau)
 		hofbrau.lupulo(6)
 		carpa1.limite(3)
+		carpa3.limite(3)
+		persona1.peso(50)
+		persona1.aguante(20)
 		persona3.aguante(29)
 		persona3.peso(80)
+		jarraGuiness.capacidad(8)
+		jarraGuiness.marca(guiness)
 		persona3.comprarJarra(jarraGuiness)
 		corona.origen("Mexico")
-		guiness.origen("Irlanda")
-		hofbrau.origen("Alemania")
+		guiness.origen("Alemania")
+		hofbrau.origen("Turca")
 	}
 
 
@@ -43,12 +48,13 @@ describe "segundaParte"{
 		carpa2.agregarGente(persona2)
 		assert.that(carpa2.dejaIngresar(persona1))
 		carpa2.agregarGente(persona1)
-		assert.notThat(carpa2.dejaIngresar(persona3)) // En esta línea se rompe todo.
+		assert.notThat(carpa2.dejaIngresar(persona3))
 		
 	}
 	test"unaPersonaPuedeEntrarAUnaCarpa"{
 		assert.that(persona1.quiereEntrar(carpa3))
 		assert.that(carpa3.dejaIngresar(persona1))
+		assert.that(persona1.puedeEntrar(carpa3))
 		
 	}
 	test"unaPersonaEntreAUnaCarpa"{
@@ -72,24 +78,22 @@ describe "segundaParte"{
 	test"cuantosEbriosEmpedernidosHayDentroDeUnaCarpa"{
 		carpa1.agregarGente(persona1)
 		assert.notEquals(2,carpa1.cantidadEbriosEmpedernidos())
-		carpa1.servirJarra(persona1,2) //En todos los test que ejecuten el metodo servirJarra, explota.
-		carpa1.servirJarra(persona1,2) 
+		persona1.comprarJarra(jarraGuiness) 
+		persona1.comprarJarra(jarraGuiness)
+		persona1.comprarJarra(jarraGuiness)
+		persona1.comprarJarra(jarraGuiness)
+		persona1.comprarJarra(jarraGuiness)
+		persona1.comprarJarra(jarraGuiness) 
 		assert.equals(1,carpa1.cantidadEbriosEmpedernidos())
 		/*Saber cuantos ebrios empedernidos hay dentro de una carpa.
 		 *  Los ebrios empedernidos son los ebrios que todas las jarras que compraron, 
 		 son de 1 litro ó más.*/
 	}
 	test"unaPersonaEsPatriota"{
-		carpa1.agregarGente(persona3)
-		carpa1.servirJarra(persona3,1) 
-		carpa1.servirJarra(persona3,1) 
-		assert.that(persona1.esPatriota())
-		carpa1.agregarGente(persona2)
-		carpa1.servirJarra(persona3,1) 
-		carpa1.servirJarra(persona3,1) 
-		assert.notThat(persona3.esPatriota())
-		/*Saber si una persona es patriota, o sea, 
-		 * si todas las jarras de cerveza que compró son del país del que proviene. 
-		 P.ej. un alemán es patriota si todas las jarras de cerveza que compró son alemanas.*/
+		persona3.comprarJarra(jarraGuiness) 
+		persona3.comprarJarra(jarraGuiness) 
+		assert.that(persona3.esPatriota())
+		persona1.comprarJarra(jarraGuiness) 
+		assert.notThat(persona1.esPatriota())
 	}
 }

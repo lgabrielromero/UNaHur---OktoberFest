@@ -39,7 +39,7 @@ class Persona{
 
 //SEGUNDA PARTE - 7
 	method puedeEntrar(carpa){
-		return self.quiereEntrar(carpa) and carpa.dejaIngresar()
+		return self.quiereEntrar(carpa) and carpa.dejaIngresar(self)
 	}
 //SEGUNDA PARTE - 8
 	method entrarACarpa(carpa){
