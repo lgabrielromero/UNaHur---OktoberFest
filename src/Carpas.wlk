@@ -28,7 +28,7 @@ class Carpa{
 
 //SEGUNDA PARTE - 9
     method servirJarra(persona, capacidad){
-    	if(self.personasDentro().any(persona)){
+    	if(self.personasDentro().contains(persona)){
     		const jarraVendida = new Jarra()
     		jarraVendida.capacidad(capacidad)
     		jarraVendida.marca(self.marca())
